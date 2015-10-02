@@ -41,6 +41,8 @@ with  open('info.json', 'rw+') as jsonRead:
 try:
 	with open('output.json', 'r') as sumId:
 		loader = json.load(sumId)
+		summonerRequest = summonerRequest.replace(" ", "")
+		print summonerRequest
 		summonerId = loader[summonerRequest.lower()]['id']
 		print summonerId
 		sumId.close()
@@ -68,7 +70,15 @@ rankedRequest = rankedRequest.lower()
 with open('parsedRanked.json', 'rw+') as champ:
 	champObj = json.load(champ)
 	for value in champObj['champions']:
-		champRequest = requests.get(championParse + str(value['id']) + champParseTwo)
+		#champRequest = requests.get(championParse + str(value['id']) + champParseTwo)
+		print str(value['id'])
+		if (str(value['id']) != '0'):
+			champRequest = requests.get(championParse + str(value['id']) +  champParseTwo)
+			#print ('this should print, and it does\n\n\n')
+			
+		else:
+			print('this shouldnt pring, and it doesnt\n\n\n')
+			continue
 		print champRequest.content
 		#champLoad = json.load(champRequest.content)
 		#champName = champRequest['key'].lower()
